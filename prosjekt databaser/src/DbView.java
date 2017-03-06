@@ -9,7 +9,7 @@ public class DbView {
    //  Database credentials
    static final String USER = "pciverse_tdt4145";
    static final String PASS = "password";
-   
+
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
@@ -64,4 +64,27 @@ public class DbView {
    }//end try
    System.out.println("Goodbye!");
 }//end main
+   public void addTreningsØkt(Date date, Time time, int varighet, int form, int prestasjon, String notat){
+      String sql = "INSERT INTO Treningsøkt VALUES (" + date + ", " + time + ", " + varighet + ", " + form + ", " + prestasjon + ", " + notat + ");";
+      // PROBLEM: Her kan det bli noe problem hvis java ikke vil konvertere int/date/time til string. pls no.
+      // Kanskje vi må definere stmt eller whatever her, og på alle metoder. Eller så kan vi ha metodene inni main.
+      ResultSet rs = stmt.executeQuery(sql); // eller noe. THIS IS AN WRONG atm PROBLEM
+   }
+
+   public void addGruppe(String navn){
+      String sql = "INSERT INTO Gruppe VALUES " + navn + ");";
+      ResultSet rs = stmt.executeQuery(sql); // THIS IS AN WRONG atm PROBLEM
+   }
+
+   public void addØvelse(String øvelse, String beskrivelse){
+      String sql = "INSERT INTO Øvelse " + øvelse + ", " + beskrivelse + ");";
+      ResultSet rs = stmt.executeQuery(sql); // THIS IS AN WRONG atm PROBLEM
+   }
+
+   public void addPeriode(Date fraDate, Date tilDate){
+      String sql = "INSERT INTO Øvelse " + fraDate + ", " + tilDate+ ");";
+      ResultSet rs = stmt.executeQuery(sql); // THIS IS AN WRONG atm PROBLEM
+   }
+
+
 }//end FirstExample
