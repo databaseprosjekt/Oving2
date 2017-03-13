@@ -93,6 +93,10 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
+   public void newTrening(String dato, String tidspunkt, int varighet, int form, int prestasjon, String notat) {
+	   ResultSet result = enquire(querys.newTrening(dato, tidspunkt, varighet, form, prestasjon, notat));
+	   closeConnection(result);
+   }
    
 	public ResultSet enquire(String sql){
 		try {
@@ -109,7 +113,7 @@ public class DbView {
 			   }
 		System.out.println("Database error");
 		return null;
-	  
+		
 	}
 	public void closeConnection(ResultSet rs){
 		try {

@@ -35,4 +35,9 @@ public class DbQuerys {
 				+ "WHERE Ovelse.ØvelsesID = Gruppe_Ovelse.ØvelsesID  "
 				+ "AND Gruppe_Ovelse.GruppeID = "+Integer.toString(groupID)+";";
 	}
+	public static String newTrening(String dato, String tidspunkt, int varighet, int form, int prestasjon, String notat) {
+		return "INSERT INTO pciverse_tdt4145.Treningsøkt"
+				+ "(Dato, Tidspunkt, Varighet, Form, Prestasjon, Notat) "
+				+ "values("+dato+","+tidspunkt+","+varighet+","+form+","+prestasjon+","+notat+");";
+	}
 }
