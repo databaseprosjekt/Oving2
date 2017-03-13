@@ -150,6 +150,63 @@ public class DbView {
 	   ResultSet result = enquire(querys.setUte(oktid, verForhold, verType, temp));
 	   closeConnection(result);
    }
+   
+   public String getTotaltResults(){
+	   ResultSet result = enquire(querys.getTotalResaults());
+	   String returnValue = null; 
+		  try {
+			while(result.next())
+			{
+				returnValue = result.getString("COUNT(*)");
+			}
+			  closeConnection(result);
+			  return returnValue;
+			  
+		} catch (SQLException e) 
+		  	{
+			e.printStackTrace();
+		  	}
+		  closeConnection(result);
+		  return null;
+	   
+   }
+   public String getTotalWorkouts(){
+	   ResultSet result = enquire(querys.getTotalWorkouts());
+	   String returnValue = null; 
+		  try {
+			while(result.next())
+			{
+				returnValue = result.getString("COUNT(*)");
+			}
+			  closeConnection(result);
+			  return returnValue;
+			  
+		} catch (SQLException e) 
+		  	{
+			e.printStackTrace();
+		  	}
+		  closeConnection(result);
+		  return null;
+	   
+   }
+	public String getTotaltExercies() {
+		   ResultSet result = enquire(querys.getTotaltExercies());
+		   String returnValue = null; 
+			  try {
+				while(result.next())
+				{
+					returnValue = result.getString("COUNT(*)");
+				}
+				  closeConnection(result);
+				  return returnValue;
+				  
+			} catch (SQLException e) 
+			  	{
+				e.printStackTrace();
+			  	}
+			  closeConnection(result);
+			  return null;
+	}
    /**
     * 
     * sets up, adn executes sql
@@ -189,4 +246,5 @@ public class DbView {
 			      se.printStackTrace(); 
 		}
 	}
+
 }

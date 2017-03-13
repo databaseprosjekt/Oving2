@@ -13,6 +13,10 @@ public class DbQuerys {
 	public static String getAlleGrupper(){
 		return "SELECT * FROM pciverse_tdt4145.Gruppe;";
 	}
+	/////////////////////////
+	//Querys for categories//
+	/////////////////////////
+	
 	public static  String getSubGrupper(int groupID){
 		return "SELECT G.Navn, GG.AltGruppeID "
 				+ "FROM pciverse_tdt4145.Gruppe G, pciverse_tdt4145.Gruppe_Gruppe GG "
@@ -53,10 +57,27 @@ public class DbQuerys {
 				+ "values("+oktid+","+verForhold+","+verType+","+temp+");";
 	}
 	
+	///////////////////////
+	//Querys for periodes//
+	///////////////////////
+	
 	public static String getTreningFromPeriode() {
 		return "SELECT p.FraDato, p.TilDato, COUNT(*)"
 				+ " FROM Treningsøkt t, Periode p "
 				+ "WHERE p.FraDato < t.Dato"
 				+ " AND p.TilDato > t.Dato;";
+	}
+	/////////////////////
+	//Querys for stats://
+	/////////////////////
+	
+	public static String getTotalResaults(){
+		return "SELECT COUNT(*) FROM pciverse_tdt4145.Resultat;";
+	}
+	public String getTotalWorkouts() {
+		return "SELECT COUNT(*) FROM pciverse_tdt4145.Treningsøkt;";
+	}
+	public String getTotaltExercies() {
+		return "SELECT COUNT(*) FROM pciverse_tdt4145.Øvelse;";
 	}
 }
