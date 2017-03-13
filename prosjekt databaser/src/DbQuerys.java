@@ -68,12 +68,12 @@ public class DbQuerys {
 				+ " AND p.TilDato > t.Dato;";
 	}
 
-public static String getResultatFromPeriode(int periode) {
-	return "SELECT p.PeriodeID, r.ResultatID, t.Prestasjon, t.Notat"
-			+ " FROM Periode p, Resultat_Periode r_p, Resultat r, Treningsøkt t "
-			+ "WHERE p.PeriodeID = r_p.PeriodeID "
-			+ "AND r.ResultatID = r_p.ResultatID "
-			+ "AND t.ØktID = r.ØktID;";
+	public static String getResultatFromPeriode(int periode) {
+		return "SELECT p.PeriodeID, r.ResultatID, t.Prestasjon, t.Notat"
+				+ " FROM Periode p, Resultat_Periode r_p, Resultat r, Treningsøkt t "
+				+ "WHERE p.PeriodeID = r_p.PeriodeID "
+				+ "AND r.ResultatID = r_p.ResultatID "
+				+ "AND t.ØktID = r.ØktID;";
 }
 	/////////////////////
 	//Querys for stats://
