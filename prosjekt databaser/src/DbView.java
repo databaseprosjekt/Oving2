@@ -4,29 +4,29 @@ import java.util.ArrayList;
 
 public class DbView {
    // JDBC driver name and database URL
-   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
    static final String DB_URL = "jdbc:mysql://mysql.stud.ntnu.no";
 
    //  Database credentials
    static final String USER = "pciverse_tdt4145";
    static final String PASS = "password";
-   
-   private DbQuerys querys; 
-   
+
+   private DbQuerys querys;
+
    Connection conn = null;
    Statement stmt = null;
 
-   public static void main(String[] args) {
-   try{
-      //STEP 2: Register JDBC driver
-      Class.forName("com.mysql.jdbc.Driver");
-   }catch(Exception e){
-	   System.out.println(e);
+   public DbView(){
+	   querys = new DbQuerys();
+	   try{
+		      Class.forName("com.mysql.jdbc.Driver");
+		   }catch(Exception e){
+			   System.out.println(e);
+		   }
    }
-   
-}//end main
-   
- /*  
+
+
+ /*
    public void addTreningsØkt(Date date, Time time, int varighet, int form, int prestasjon, String notat){
       String sql = "INSERT INTO Treningsøkt VALUES (" + date + ", " + time + ", " + varighet + ", " + form + ", " + prestasjon + ", " + notat + ");";
       // PROBLEM: Her kan det bli noe problem hvis java ikke vil konvertere int/date/time til string. pls no.
@@ -55,11 +55,11 @@ public class DbView {
 	  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
 	  arrayResult.add(new ArrayList<String>());
 	  arrayResult.add(new ArrayList<Integer>());
-	  
+
 	  try {
 		while(result.next()) {
 			  arrayResult.get(0).add(result.getString("Ovelse.Navn"));
-			  arrayResult.get(1).add(result.getString("Ovelse.�velsesID"));
+			  arrayResult.get(1).add(result.getString("Ovelse.�velsesID"));
 			}
 		  closeConnection(result);
 		  return arrayResult;
@@ -101,7 +101,7 @@ public class DbView {
 			      }//end finally try
 			   }//end try
 		System.out.println("Database error");
-	  return null; 
+	  return null;
 	}
 	public void closeConnection(ResultSet rs){
 		try {

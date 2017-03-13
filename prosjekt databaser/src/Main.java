@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -7,8 +8,11 @@ public class Main {
 	private static String input = null;
 	public static void main (String[] args)
 	{
+		DbView dbView = new DbView();
 		inputScanner = new Scanner(System.in);
-
+		ArrayList<ArrayList> result = dbView.getOvelseFraGruppe(1);
+		System.out.println(result.get(1).get(1));
+		System.out.println(result.get(1).get(2).toString());
 		run:
 		while(true)
 		{
