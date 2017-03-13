@@ -13,6 +13,10 @@ public class DbQuerys {
 	public static String getAlleGrupper(){
 		return "SELECT * FROM pciverse_tdt4145.Gruppe;";
 	}
+	/////////////////////////
+	//Querys for categories//
+	/////////////////////////
+	
 	public static  String getSubGrupper(int groupID){
 		return "SELECT G.Navn, GG.AltGruppeID "
 				+ "FROM pciverse_tdt4145.Gruppe G, pciverse_tdt4145.Gruppe_Gruppe GG "
@@ -53,21 +57,37 @@ public class DbQuerys {
 				+ "values("+oktid+","+verForhold+","+verType+","+temp+");";
 	}
 	
+	///////////////////////
+	//Querys for periodes//
+	///////////////////////
+	
 	public static String getTreningFromPeriode(int periode) {
 		return "SELECT p.FraDato, p.TilDato, COUNT(*)"
 				+ " FROM Treningsøkt t, Periode p "
 				+ "WHERE p.FraDato < t.Dato"
 				+ " AND p.TilDato > t.Dato;";
 	}
-	
-	
+
 	public static String getResultatFromPeriode(int periode) {
 		return "SELECT p.PeriodeID, r.ResultatID, t.Prestasjon, t.Notat"
 				+ " FROM Periode p, Resultat_Periode r_p, Resultat r, Treningsøkt t "
 				+ "WHERE p.PeriodeID = r_p.PeriodeID "
 				+ "AND r.ResultatID = r_p.ResultatID "
 				+ "AND t.ØktID = r.ØktID;";
-	}
+}
+	/////////////////////
+	//Querys for stats://
+	/////////////////////
 	
+	public static String getTotalResaults(){
+		return "SELECT COUNT(*) FROM pciverse_tdt4145.Resultat;";
+	}
+	public String getTotalWorkouts() {
+		return "SELECT COUNT(*) FROM pciverse_tdt4145.Treningsøkt;";
+	}
+	public String getTotaltExercies() {
+		return "SELECT COUNT(*) FROM pciverse_tdt4145.Øvelse;";
+	}
+
 	
 }

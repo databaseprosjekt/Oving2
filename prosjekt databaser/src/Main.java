@@ -120,12 +120,15 @@ public class Main {
 
 	private static void periods()
 	{
-		System.out.println("Go Periods");
+		System.out.println("Go");
 	}
 
 	private static void statistics()
 	{
-		System.out.println("Go Statistics");
+
+		System.out.println("Total results: " + dbView.getTotaltResults() +".");
+		System.out.println("Total workouts: " + dbView.getTotalWorkouts() +".");
+		System.out.println("Total exercices: " + dbView.getTotaltExercies() +".");
 	}
 
 }
