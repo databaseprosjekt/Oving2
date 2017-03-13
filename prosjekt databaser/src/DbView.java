@@ -23,7 +23,11 @@ public class DbView {
 		   System.out.println(e);
 	   }
    }
-
+   /**
+    * Gives Øvelse for a given gruppe
+    * @param groupID
+    * @return ArrayList<ArrayList>
+    */
    public ArrayList<ArrayList> getOvelseFraGruppe(int groupID)
    {
 	  ResultSet result =  enquire(querys.getOvelseFraGruppe(groupID));
@@ -47,6 +51,11 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
+   /**
+    * All group with relation to groupid
+    * @param groupID
+    * @return ArrayList<ArrayList>
+    */
    public ArrayList<ArrayList> getsubGruppe(int groupID)
    {
 	  ResultSet result =  enquire(querys.getSubGrupper(groupID));
@@ -70,6 +79,10 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
+   /**
+    * Give you all groups with no relation
+    * @return ArrayList<ArrayList>
+    */
    public ArrayList<ArrayList> getIkkeSubGrupper()
    {
 	  ResultSet result =  enquire(querys.getIkkeSubGrupper());
@@ -93,11 +106,55 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
+   /**
+    * Ads new Treningsøkt to db
+    * @param dato
+    * @param tidspunkt
+    * @param varighet
+    * @param form
+    * @param prestasjon
+    * @param notat
+    */
    public void newTrening(String dato, String tidspunkt, int varighet, int form, int prestasjon, String notat) {
 	   ResultSet result = enquire(querys.newTrening(dato, tidspunkt, varighet, form, prestasjon, notat));
 	   closeConnection(result);
    }
    
+   /**
+    * Adds new Oving to Treningsøkt
+    * @param ovingid
+    * @param treningid
+    */
+   public void newOving(int ovingid, int treningid) {
+	   ResultSet result = enquire(querys.newOving(ovingid, treningid));
+	   closeConnection(result);
+   }
+   /**
+    * Sets Treningsøkt til inneaktivitet
+    * @param oktid
+    * @param ventelasjon
+    * @param antallTilskuere
+    */
+   public void setInne(int oktid, String ventelasjon, int antallTilskuere) {
+	   ResultSet result = enquire(querys.setInne(oktid, ventelasjon, antallTilskuere));
+	   closeConnection(result);
+   }
+   /**
+    * sets Treningsøkt til uteaktivitet
+    * @param oktid
+    * @param verForhold
+    * @param verType
+    * @param temp
+    */
+   public void setUte(int oktid, String verForhold, String verType,  int temp){
+	   ResultSet result = enquire(querys.setUte(oktid, verForhold, verType, temp));
+	   closeConnection(result);
+   }
+   /**
+    * 
+    * sets up, adn executes sql
+    * @return ResultSet with db values 
+    */
 	public ResultSet enquire(String sql){
 		try {
 	      conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -115,6 +172,12 @@ public class DbView {
 		return null;
 		
 	}
+	
+	/**
+	 * Closes connection with db, and closes ResultSet
+	 * @param ResultSet db
+	 * @return void
+	 */
 	public void closeConnection(ResultSet rs){
 		try {
 	      rs.close();
