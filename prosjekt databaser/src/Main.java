@@ -12,7 +12,7 @@ public class Main {
 		inputScanner = new Scanner(System.in);
 		ArrayList<ArrayList> result = dbView.getOvelseFraGruppe(1);
 		System.out.println(result.get(0).get(0));
-		System.out.println(result.get(0).get(1).toString());
+		System.out.println(result.get(1).get(0).toString());
 		run:
 		while(true)
 		{
