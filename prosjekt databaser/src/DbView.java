@@ -25,7 +25,7 @@ public class DbView {
    }
    /**
     * Gives Øvelse for a given gruppe
-    * @param groupID
+    * @param groupID 
     * @return ArrayList<ArrayList>
     */
    public ArrayList<ArrayList> getOvelseFraGruppe(int groupID)
@@ -153,6 +153,7 @@ public class DbView {
    /**
     * 
     * sets up, adn executes sql
+    * @parm sql
     * @return ResultSet with db values 
     */
 	public ResultSet enquire(String sql){
