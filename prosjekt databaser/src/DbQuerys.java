@@ -27,15 +27,12 @@ public class DbQuerys {
 					+ "FROM pciverse_tdt4145.Gruppe_Gruppe GG "
 					+ "WHERE G.GruppeID = GG.AltGruppeID);";
 	}
-	public String getIkkeSubGrupper(int groupID){
-		return "SELECT * "
-				+ "FROM pciverse_tdt4145.Gruppe G "
-				+ "WHERE NOT EXISTS "
-					+ "(SELECT *"
-					+ "FROM pciverse_tdt4145.Gruppe_Gruppe GG "
-					+ "WHERE G.GruppeID = GG.AltGruppeID AND "
-					+ Integer.toString(groupID)+ ");";
+	
+	public String getOvelseFraGruppe(int groupID){
+		return "SELECT Ovelse.Navn, Ovelse.Beskrivelse "
+				+ "FROM `pciverse_tdt4145`.`Gruppe_Øvelse` Gruppe_Ovelse, "
+				+ "`pciverse_tdt4145`.`Øvelse` Ovelse "
+				+ "WHERE Ovelse.ØvelsesID = Gruppe_Ovelse.ØvelsesID  "
+				+ "AND Gruppe_Ovelse.GruppeID = "+Integer.toString(groupID)+";";
 	}
-	
-	
 }
