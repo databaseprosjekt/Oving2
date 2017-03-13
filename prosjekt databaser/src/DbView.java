@@ -151,7 +151,7 @@ public class DbView {
 	   closeConnection(result);
    }
    
-<<<<<<< HEAD
+
    
    public ArrayList<ArrayList> getTreningFromPeriode(int periode) {
 	  ResultSet result =  enquire(querys.getTreningFromPeriode(periode));
@@ -166,7 +166,14 @@ public class DbView {
 			}
 			  closeConnection(result);
 			  return arrayResult;
-=======
+	  } catch (SQLException e) 
+	  	{
+		e.printStackTrace();
+	  	}
+	  closeConnection(result);
+	  return null;
+   }
+   
    public String getTotaltResults(){
 	   ResultSet result = enquire(querys.getTotalResaults());
 	   String returnValue = null; 
@@ -177,7 +184,7 @@ public class DbView {
 			}
 			  closeConnection(result);
 			  return returnValue;
->>>>>>> master
+
 			  
 		} catch (SQLException e) 
 		  	{
@@ -185,12 +192,9 @@ public class DbView {
 		  	}
 		  closeConnection(result);
 		  return null;
-<<<<<<< HEAD
+
    }
-   
-=======
-	   
-   }
+
    public String getTotalWorkouts(){
 	   ResultSet result = enquire(querys.getTotalWorkouts());
 	   String returnValue = null; 
@@ -228,7 +232,7 @@ public class DbView {
 			  closeConnection(result);
 			  return null;
 	}
->>>>>>> master
+
    /**
     * 
     * sets up, adn executes sql
