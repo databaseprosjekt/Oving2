@@ -52,4 +52,11 @@ public class DbQuerys {
 		return "INSERT INTO pciverse_tdt4145.Utendørsaktivitet(ØktID, Værforhold, værtype, Temperatur) "
 				+ "values("+oktid+","+verForhold+","+verType+","+temp+");";
 	}
+	
+	public static String getTreningFromPeriode() {
+		return "SELECT p.FraDato, p.TilDato, COUNT(*)"
+				+ " FROM Treningsøkt t, Periode p "
+				+ "WHERE p.FraDato < t.Dato"
+				+ " AND p.TilDato > t.Dato;";
+	}
 }
