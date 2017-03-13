@@ -47,6 +47,52 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
+   public ArrayList<ArrayList> getsubGruppe(int groupID)
+   {
+	  ResultSet result =  enquire(querys.getSubGrupper(groupID));
+	  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+	  arrayResult.add(new ArrayList<Integer>());
+	  arrayResult.add(new ArrayList<String>());
+	  
+	  try {
+		while(result.next())
+		{
+			arrayResult.get(1).add(result.getString("Navn"));
+			arrayResult.get(0).add(result.getString("AltGruppeID"));
+		}
+		  closeConnection(result);
+		  return arrayResult;
+		  
+	} catch (SQLException e) 
+	  	{
+		e.printStackTrace();
+	  	}
+	  closeConnection(result);
+	  return null;
+   }
+   public ArrayList<ArrayList> getIkkeSubGrupper()
+   {
+	  ResultSet result =  enquire(querys.getIkkeSubGrupper());
+	  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+	  arrayResult.add(new ArrayList<Integer>());
+	  arrayResult.add(new ArrayList<String>());
+	  
+	  try {
+		while(result.next())
+		{
+			arrayResult.get(1).add(result.getString("Navn"));
+			arrayResult.get(0).add(result.getString("GruppeID"));
+		}
+		  closeConnection(result);
+		  return arrayResult;
+		  
+	} catch (SQLException e) 
+	  	{
+		e.printStackTrace();
+	  	}
+	  closeConnection(result);
+	  return null;
+   }
    
 	public ResultSet enquire(String sql){
 		try {
@@ -94,7 +140,7 @@ public class DbView {
 	      String sql = "INSERT INTO Øvelse " + øvelse + ", " + beskrivelse + ");";
 	      ResultSet rs = stmt.executeQuery(sql); // THIS IS AN WRONG atm PROBLEM
 	   }
-
+ 
 	   public void addPeriode(Date fraDate, Date tilDate){
 	      String sql = "INSERT INTO Øvelse " + fraDate + ", " + tilDate+ ");";
 	      ResultSet rs = stmt.executeQuery(sql); // THIS IS AN WRONG atm PROBLEM
