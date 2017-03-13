@@ -40,4 +40,16 @@ public class DbQuerys {
 				+ "(Dato, Tidspunkt, Varighet, Form, Prestasjon, Notat) "
 				+ "values("+dato+","+tidspunkt+","+varighet+","+form+","+prestasjon+","+notat+");";
 	}
+	public static String newOving(int ovingid, int treningid) {
+		return "INSERT INTO pciverse_tdt4145.Treningsøkt_Øvelse(ØktID, ØvelseID)"
+				+ " values("+Integer.toString(treningid)+", " + Integer.toString(ovingid)+");";
+	}
+	public static String setInne(int oktid, String ventelasjon, int antallTilskuere){
+		return "INSERT INTO pciverse_tdt4145.Innendørsaktivitet(ØktID, Luftventilasjon, Antall_tilskuere) "
+				+ "values("+oktid+","+ventelasjon+","+antallTilskuere+"); ";
+	}
+	public static String setUte(int oktid, String verForhold, String verType,  int temp){
+		return "INSERT INTO pciverse_tdt4145.Utendørsaktivitet(ØktID, Værforhold, værtype, Temperatur) "
+				+ "values("+oktid+","+verForhold+","+verType+","+temp+");";
+	}
 }
