@@ -150,6 +150,30 @@ public class DbView {
 	   ResultSet result = enquire(querys.setUte(oktid, verForhold, verType, temp));
 	   closeConnection(result);
    }
+   
+   
+   public ArrayList<ArrayList> getTreningFromPeriode(int periode) {
+	  ResultSet result =  enquire(querys.getTreningFromPeriode(periode));
+	  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+	  arrayResult.add(new ArrayList<String>());
+	  arrayResult.add(new ArrayList<String>());
+	  try {
+			while(result.next())
+			{
+				arrayResult.get(0).add(result.getString("p.FraDato"));
+				arrayResult.get(1).add(result.getString("p.TilDato"));
+			}
+			  closeConnection(result);
+			  return arrayResult;
+			  
+		} catch (SQLException e) 
+		  	{
+			e.printStackTrace();
+		  	}
+		  closeConnection(result);
+		  return null;
+   }
+   
    /**
     * 
     * sets up, adn executes sql
