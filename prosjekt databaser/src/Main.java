@@ -43,10 +43,19 @@ public class Main {
 		}
 	}
 
+
+	/**
+	 * Recursively navigate through categories based of user input.
+	 * Call with -1 to initiate using groups that are not subgroups in any other groups
+	 * @param groupID
+	 * @return OvelsesID
+	 */
 	private static int categories(int groupID)
 	{
 		ArrayList<ArrayList> groups = null;
 		ArrayList<ArrayList> exercises = null;
+
+
 		if (groupID < 0)
 		{
 			groups = dbView.getIkkeSubGrupper();
