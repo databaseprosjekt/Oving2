@@ -53,10 +53,21 @@ public class DbQuerys {
 				+ "values("+oktid+","+verForhold+","+verType+","+temp+");";
 	}
 	
-	public static String getTreningFromPeriode() {
+	public static String getTreningFromPeriode(int periode) {
 		return "SELECT p.FraDato, p.TilDato, COUNT(*)"
 				+ " FROM Treningsøkt t, Periode p "
 				+ "WHERE p.FraDato < t.Dato"
 				+ " AND p.TilDato > t.Dato;";
 	}
+	
+	
+	public static String getResultatFromPeriode(int periode) {
+		return "SELECT p.PeriodeID, r.ResultatID, t.Prestasjon, t.Notat"
+				+ " FROM Periode p, Resultat_Periode r_p, Resultat r, Treningsøkt t "
+				+ "WHERE p.PeriodeID = r_p.PeriodeID "
+				+ "AND r.ResultatID = r_p.ResultatID "
+				+ "AND t.ØktID = r.ØktID;";
+	}
+	
+	
 }
