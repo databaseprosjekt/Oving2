@@ -61,11 +61,13 @@ public class DbView {
 			  arrayResult.get(0).add(result.getString("Ovelse.Navn"));
 			  arrayResult.get(1).add(result.getString("Ovelse.ØvelsesID"));
 			}
+		  closeConnection(result);
 		  return arrayResult;
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	  closeConnection(result);
 	  return null;
    }
 	public ResultSet enquire(String sql){
@@ -78,18 +80,12 @@ public class DbView {
 	      ResultSet rs = stmt.executeQuery(sql);
 
 	      //STEP 6: Clean-up environment
-	      rs.close();
-	      stmt.close();
-	      conn.close();
-	      
+
 	      return rs;
 
 		   }catch(SQLException se){
 			      //Handle errors for JDBC
 			      se.printStackTrace();
-			   }catch(Exception e){
-			      //Handle errors for Class.forName
-			      e.printStackTrace();
 			   }finally{
 			      //finally block used to close resources
 			      try{
@@ -106,5 +102,16 @@ public class DbView {
 			   }//end try
 		System.out.println("Database error");
 	  return null; 
+	}
+	public void closeConnection(ResultSet rs){
+		try {
+	      rs.close();
+	      stmt.close();
+	      conn.close();
+	      
+		   }catch(Exception se){
+			      //Handle errors for JDBC
+			      se.printStackTrace(); 
+		}
 	}
 }//end FirstExample

@@ -29,7 +29,7 @@ public class DbQuerys {
 	}
 	
 	public String getOvelseFraGruppe(int groupID){
-		return "SELECT Ovelse.Navn, Ovelse.Beskrivelse "
+		return "SELECT Ovelse.Navn, Ovelse.ØvelsesID "
 				+ "FROM `pciverse_tdt4145`.`Gruppe_Øvelse` Gruppe_Ovelse, "
 				+ "`pciverse_tdt4145`.`Øvelse` Ovelse "
 				+ "WHERE Ovelse.ØvelsesID = Gruppe_Ovelse.ØvelsesID  "
