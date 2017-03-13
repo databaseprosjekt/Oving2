@@ -27,4 +27,15 @@ public class DbQuerys {
 					+ "FROM pciverse_tdt4145.Gruppe_Gruppe GG "
 					+ "WHERE G.GruppeID = GG.AltGruppeID);";
 	}
+	public String getIkkeSubGrupper(int groupID){
+		return "SELECT * "
+				+ "FROM pciverse_tdt4145.Gruppe G "
+				+ "WHERE NOT EXISTS "
+					+ "(SELECT *"
+					+ "FROM pciverse_tdt4145.Gruppe_Gruppe GG "
+					+ "WHERE G.GruppeID = GG.AltGruppeID AND "
+					+ Integer.toString(groupID)+ ");";
+	}
+	
+	
 }
