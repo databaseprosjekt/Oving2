@@ -11,8 +11,8 @@ public class Main {
 		DbView dbView = new DbView();
 		inputScanner = new Scanner(System.in);
 		ArrayList<ArrayList> result = dbView.getOvelseFraGruppe(1);
-		System.out.println(result.get(1).get(1));
-		System.out.println(result.get(1).get(2).toString());
+		System.out.println(result.get(0).get(0));
+		System.out.println(result.get(0).get(1).toString());
 		run:
 		while(true)
 		{
