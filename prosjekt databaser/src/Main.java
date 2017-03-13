@@ -6,9 +6,9 @@ public class Main {
 
 	private static Scanner inputScanner = null;
 	private static String input = null;
+	private static DbView dbView = new DbView();
 	public static void main (String[] args)
 	{
-		DbView dbView = new DbView();
 		inputScanner = new Scanner(System.in);
 		ArrayList<ArrayList> result = dbView.getIkkeSubGrupper();
 		System.out.println(result.get(0).get(0));
@@ -26,7 +26,7 @@ public class Main {
 			switch(input)
 			{
 				case "1":
-					categories();
+					categories(-1);
 					break;
 
 				case "2":
@@ -47,7 +47,7 @@ public class Main {
 		}
 	}
 
-	private static void categories()
+	private static void categories(int groupID)
 	{
 		System.out.println("Go Categories");
 	}
