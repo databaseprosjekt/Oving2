@@ -26,7 +26,7 @@ public class Main {
 					break;
 
 				case "2":
-					periods();
+					System.out.println(periods(-1));
 					break;
 
 				case "3":
@@ -118,10 +118,65 @@ public class Main {
 			return (Integer.parseInt((String)exercises.get(0).get(inputIndex-groups.get(0).size()-1)));
 	}
 
-	private static void periods()
-	{
-		System.out.println("Go");
+	private static int periods(int periode) {
+		ArrayList<ArrayList> periodes = null;
+		ArrayList<ArrayList> results = null;
+
+
+		if (periode < 0) {
+			periodes = dbView.getTreningFromPeriode(periode);
+			results = dbView.getResultatFromPeriode(periode);
+		}
+
+		int index = 1;
+		if (periodes.get(0).size() > 0)
+		{
+			System.out.println("Perioder:");
+			for (int i = 0; i < periodes.get(0).size(); i++)
+			{
+				System.out.println(Integer.toString(index++) + ": " + periodes.get(1).get(i) + " til " 
+						+ periodes.get(2).get(i) + " har " + periodes.get(3).get(i) + " treninger.");
+			}
+
+			System.out.println();
+		}
+		/*if (results.get(0).size() > 0)
+		{
+			System.out.println("Resultater:");
+			for (int i = 0; i < results.get(0).size(); i++)
+			{
+				System.out.println(Integer.toString(index++) + ": Treningsøkt" + results.get(1).get(i));
+			}
+		}*/
+		if (index == 1)
+		{
+			System.out.println("result is empty");
+			return -1;
+		}
+		String input = "";
+		int inputIndex = 0;
+		boolean invalid = true;
+		while (invalid) {
+			invalid = false;
+			try
+			{
+				input = inputScanner.nextLine();
+				inputIndex = Integer.parseInt(input);
+				if (inputIndex < 1 || inputIndex >= index)
+					throw new Exception();
+			}
+			catch(Exception e)
+			{
+				System.out.println("Invalid input");
+				invalid = true;
+			}
+		}
+		if(inputIndex <= results.get(0).size())
+			return periods(inputIndex);
+		else
+			return (Integer.parseInt((String)periodes.get(0).get(inputIndex-results.get(0).size()-1)));
 	}
+
 
 	private static void statistics()
 	{
