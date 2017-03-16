@@ -80,6 +80,33 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
+   public ArrayList<ArrayList> getPeriodes()
+   {
+	  ResultSet result =  enquire(querys.getPeriodes());
+	  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+	  arrayResult.add(new ArrayList<Integer>());
+	  arrayResult.add(new ArrayList<Date>());
+	  arrayResult.add(new ArrayList<Date>());
+	  arrayResult.add(new ArrayList<Integer>());
+
+	  try {
+		while(result.next())
+		{
+			arrayResult.get(0).add(result.getString("PeriodeID"));
+			arrayResult.get(1).add(result.getDate("FraDato"));
+			arrayResult.get(2).add(result.getDate("TilDato"));
+
+		}
+		  closeConnection(result);
+		  return arrayResult;
+
+	} catch (SQLException e)
+	  	{
+		e.printStackTrace();
+	  	}
+	  closeConnection(result);
+	  return null;
+   }
    /**
     * Give you all groups with no relation
     * @return ArrayList<ArrayList>
@@ -186,30 +213,30 @@ public class DbView {
    }
 
    public ArrayList<ArrayList> getResultatFromPeriode(int periode) {
-		  ResultSet result =  enquire(querys.getResultatFromPeriode(periode));
-		  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
-		  arrayResult.add(new ArrayList<Integer>());
-		  arrayResult.add(new ArrayList<Integer>());
-		  arrayResult.add(new ArrayList<Integer>());
-		  arrayResult.add(new ArrayList<Integer>());
-		  arrayResult.add(new ArrayList<String>());
-		  try {
-				while(result.next())
-				{
-					arrayResult.get(0).add(result.getInt("p.PeriodeID"));
-					arrayResult.get(1).add(result.getInt("t.ØktID"));
-					arrayResult.get(2).add(result.getInt("r.ResultatID"));
-					arrayResult.get(3).add(result.getInt("t.Prestasjon"));
-					arrayResult.get(4).add(result.getString("t.Notat"));
-				}
-				  closeConnection(result);
-				  return arrayResult;
-		  } catch (SQLException e)
-		  	{
-			e.printStackTrace();
-		  	}
-		  closeConnection(result);
-		  return null;
+	  ResultSet result =  enquire(querys.getResultatFromPeriode(periode));
+	  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+	  arrayResult.add(new ArrayList<Integer>());
+	  arrayResult.add(new ArrayList<Integer>());
+	  arrayResult.add(new ArrayList<Integer>());
+	  arrayResult.add(new ArrayList<Integer>());
+	  arrayResult.add(new ArrayList<String>());
+	  try {
+			while(result.next())
+			{
+				arrayResult.get(0).add(result.getInt("p.PeriodeID"));
+				arrayResult.get(1).add(result.getInt("t.ØktID"));
+				arrayResult.get(2).add(result.getInt("r.ResultatID"));
+				arrayResult.get(3).add(result.getInt("t.Prestasjon"));
+				arrayResult.get(4).add(result.getString("t.Notat"));
+			}
+			  closeConnection(result);
+			  return arrayResult;
+	  } catch (SQLException e)
+	  	{
+		e.printStackTrace();
+	  	}
+	  closeConnection(result);
+	  return null;
 	   }
 
    public String getTotaltResults(){
