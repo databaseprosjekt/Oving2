@@ -112,7 +112,6 @@ public class DbView {
 	  arrayResult.add(new ArrayList<Integer>());
 	  arrayResult.add(new ArrayList<Date>());
 	  arrayResult.add(new ArrayList<Date>());
-	  arrayResult.add(new ArrayList<Integer>());
 
 	  try {
 		while(result.next())
@@ -225,6 +224,31 @@ public class DbView {
 				arrayResult.add(result.getString("Værforhold"));
 				arrayResult.add(result.getString("Værtype"));
 				arrayResult.add(result.getInt("Temperatur"));
+			}
+			  closeConnection(result);
+			  return arrayResult;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	   closeConnection(result);
+	   return null;
+   }
+   public ArrayList<ArrayList> getWorkoutForPeriod(int periodeID)
+   {
+	   ResultSet result = enquire(querys.getWorkoutFromPeriod(periodeID));
+	   ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+	   arrayResult.add(new ArrayList<Integer>());
+	   arrayResult.add(new ArrayList<Date>());
+	   arrayResult.add(new ArrayList<Time>());
+
+	   try {
+			if(result.next())
+			{
+				arrayResult.get(0).add(result.getString("ØktID"));
+				arrayResult.get(1).add(result.getInt("Dato"));
+				arrayResult.get(2).add(result.getString("Tidspunkt"));
+				
 			}
 			  closeConnection(result);
 			  return arrayResult;

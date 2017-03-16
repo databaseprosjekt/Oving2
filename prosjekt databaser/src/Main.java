@@ -3,6 +3,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.mysql.jdbc.StringUtils;
+
 public class Main {
 
 
@@ -16,7 +18,7 @@ public class Main {
 		{
 			System.out.println("1: Opprett treningsøkt");
 			System.out.println("2: Se treningsøkter");
-			System.out.println("3: Resultater");
+			System.out.println("3: Statistikk");
 			System.out.println("4: Avslutt");
 
 			String input = inputScanner.nextLine();
@@ -32,7 +34,7 @@ public class Main {
 					break;
 
 				case "3":
-					Resultater();
+					Statistikk();
 					break;
 					
 				case "4":
@@ -251,7 +253,7 @@ public class Main {
 					System.out.println("Ugyldig valg, prøv igjen:");
 					invalid = true;
 					break;
-			}
+			} 
 		}
 
 		ArrayList<Integer> exercises = new ArrayList<Integer>();
@@ -357,12 +359,43 @@ public class Main {
 	}
 	private static void viewSessionList()
 	{
-		ArrayList<ArrayList> sessions = dbView.getAlleTreninger();
-		for (int i = 1; i <= sessions.get(0).size(); i++)
+		run:
+		while(true)
 		{
-			System.out.println(i + ": " + sessions.get(1).get(i-1).toString() + ", " + sessions.get(2).get(i-1).toString());
-		}
+			System.out.println("1: Se alle");
+			System.out.println("2: Se etter periode");
+			System.out.println("3: Tilbake");
 
+			String input = inputScanner.nextLine();
+
+			switch(input)
+			{
+				case "1":
+					ArrayList<ArrayList> sessions = dbView.getAlleTreninger();
+					for (int i = 1; i <= sessions.get(0).size(); i++)
+					{
+						System.out.println(i + ": " + sessions.get(1).get(i-1).toString() + ", " + sessions.get(2).get(i-1).toString());
+					}
+					selectWorkout(sessions);
+					break;
+					
+				case "2":
+					periods();
+					break;
+
+				case "3":
+					break run;
+
+				default:
+					System.out.println("Ugyldig valg, prøv igjen:");
+					break;
+			}
+			System.out.println();
+		}
+	}
+		
+	
+	public static void selectWorkout(ArrayList<ArrayList> sessions) {
 		String input = "";
 		int index = -1;
 		boolean invalid = true;
@@ -430,7 +463,7 @@ public class Main {
 			System.out.println("Navn: " + (String)exercises.get(1).get(i));
 			System.out.println("Beskrivelse: " + (String)exercises.get(2).get(i));
 		}
-
+		
 		System.out.println();
 		System.out.println("1: Slett treningsøkt");
 		System.out.println("2: Ferdig");
@@ -457,7 +490,7 @@ public class Main {
 		}
 	}
 	
-	private static void Resultater()
+	private static void Statistikk()
 	{
 		System.out.println("Total results: " + dbView.getTotaltResults() +".");
 		System.out.println("Total workouts: " + dbView.getTotalWorkouts() +".");
@@ -467,22 +500,12 @@ public class Main {
 		run:
 		while(true)
 		{
-			System.out.println("1. Top 10");
-			System.out.println("2. Etter periode");
-			System.out.println("3. Tilbake");
+			System.out.println("1. Tilbake");
 			String input = inputScanner.nextLine();
 
 			switch(input)
 			{
 				case "1":
-					System.out.println("To be made...");
-					break;
-					
-				case "2":
-					periods();
-					break;
-					
-				case "3":
 					break run;
 
 				default:
@@ -490,17 +513,34 @@ public class Main {
 			}
 		}
 	}
+	
 	private static void periods() {
+		
+		
+		System.out.println("Nr\tFraDato \tTilDato \n----------------------------------------");
 		ArrayList<ArrayList> periodes = dbView.getPeriodes();
 		
-		System.out.println("ID\tFraDato \tTilDato \n----------------------------------------");
-			for(int i = 0;i<periodes.get(0).size();i++){
-				System.out.print(periodes.get(0).get(i)+"\t");
-				System.out.print(periodes.get(1).get(i)+"\t");
-				System.out.print(periodes.get(2).get(i)+"\t\n");
+		for(int i = 0;i<periodes.get(0).size();i++){
+			System.out.print(i+1+"\t");
+			System.out.print(periodes.get(1).get(i)+"\t");
+			System.out.print(periodes.get(2).get(i)+"\t\n");
 			}
-			System.out.println("");
+		System.out.println("");
+		
+		String input = inputScanner.nextLine();
+		if(StringUtils.isStrictlyNumeric(input) && Integer.parseInt(input)>0 && Integer.parseInt(input)-1<periodes.get(0).size()){
+			int index = (int) periodes.get(0).get(Integer.parseInt(input)-1);
+			System.out.println("Nr\tDato \t \tVarighet \n----------------------------------------");
+			ArrayList<ArrayList> workout = dbView.getWorkoutForPeriod(index);
 			
+			for(int i = 0;i<workout.get(0).size();i++){
+				System.out.print(i+1 + "\t");
+				System.out.print(workout.get(1).get(i)+"\t");
+				System.out.print(workout.get(2).get(i)+"\t\n");
+				}
+			System.out.println("");
+			selectWorkout(workout);
+		}
 		
 		/*
 		ArrayList<ArrayList> periodes = null;

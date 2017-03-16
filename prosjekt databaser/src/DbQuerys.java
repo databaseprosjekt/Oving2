@@ -129,5 +129,16 @@ public class DbQuerys {
 	public String getPeriodes(){
 		return "SELECT * FROM pciverse_tdt4145.Periode;";
 	}
+	public String getWorkoutFromPeriod(int periodeid){
+		return "select DISTINCT t.Dato, t.Tidspunkt, t.ØktID "
+				+ "from pciverse_tdt4145.Treningsøkt t, "
+				+ "pciverse_tdt4145.Resultat r, "
+				+ "pciverse_tdt4145.Resultat_Periode r_p, "
+				+ "pciverse_tdt4145.Periode p "
+				+ "where t.ØktID = r.ØktID and "
+				+ "r.ResultatID = "+periodeid
+				+ " and 2 = p.PeriodeID;";
+		
+	}
 
 }
