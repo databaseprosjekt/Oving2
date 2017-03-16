@@ -4,6 +4,8 @@ public class DbQuerys {
 	public DbQuerys(){
 
 	}
+
+
 	public static String getTrening(int id){
 		return "SELECT * FROM pciverse_tdt4145.Treningsøkt WHERE ØktID =" + id;
 	}
@@ -12,6 +14,41 @@ public class DbQuerys {
 	}
 	public static String getAlleGrupper(){
 		return "SELECT * FROM pciverse_tdt4145.Gruppe;";
+	}
+
+	//////////////////////////
+	//Querys for treningsøkt//
+	//////////////////////////
+
+	public static String getAlleTreninger(){
+		return "SELECT * FROM pciverse_tdt4145.Treningsøkt ORDER BY Dato, Tidspunkt;";
+	}
+
+	public static String getInne(int sessionID)
+	{
+		return "SELECT * "
+				+ "FROM pciverse_tdt4145.Innendørsaktivitet I "
+				+ "WHERE I.ØktID = " + sessionID + ";";
+	}
+
+	public static String getUte(int sessionID)
+	{
+		return "SELECT * "
+				+ "FROM pciverse_tdt4145.Utendørsaktivitet U "
+				+ "WHERE U.ØktID = " + sessionID + ";";
+	}
+
+	public static String getOvelseFraTrening(int sessionID)
+	{
+		return "SELECT Ø.ØvelsesID, Ø.Navn, Ø.Beskrivelse "
+				+ "FROM pciverse_tdt4145.Treningsøkt_Øvelse TØ, pciverse_tdt4145.Øvelse Ø "
+				+ "WHERE TØ.ØktID = " + sessionID + " AND TØ.ØvelseID = Ø.ØvelsesID;";
+	}
+
+	public static String deleteTrening(int sessionID)
+	{
+		return "DELETE FROM pciverse_tdt4145.Treningsøkt "
+				+ "WHERE ØktID = " + sessionID +";";
 	}
 	/////////////////////////
 	//Querys for categories//
