@@ -7,7 +7,6 @@ import com.mysql.jdbc.StringUtils;
 
 public class Main {
 
-
 	private static Scanner inputScanner = null;
 	private static DbView dbView = new DbView();
 	public static void main (String[] args)
@@ -535,7 +534,7 @@ public class Main {
 		String input = inputScanner.nextLine();
 		if(StringUtils.isStrictlyNumeric(input) && Integer.parseInt(input)>0 && Integer.parseInt(input)-1<periodes.get(0).size()){
 			int index = (int) periodes.get(0).get(Integer.parseInt(input)-1);
-			System.out.println("Nr\tDato \t \tVarighet \n----------------------------------------");
+			System.out.println("Nr\tDato \t \tTid \n----------------------------------------");
 			ArrayList<ArrayList> workout = dbView.getWorkoutForPeriod(index);
 			
 			for(int i = 0;i<workout.get(0).size();i++){
@@ -547,6 +546,7 @@ public class Main {
 			selectWorkout(workout);
 		}
 	}
+	
 	    private static void viewExercise(int exerciseID)
 	    {
 	        ArrayList<Object> exercise = dbView.getOvelse(exerciseID);

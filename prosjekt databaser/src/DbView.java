@@ -496,7 +496,11 @@ public class DbView {
 			System.out.println("Database error");
 			return null;
 	}
-
+	
+	/**
+	 * Sends a qurey to db
+	 * @param sql
+	 */
 	public void delete(String sql){
 		try {
 		      conn = DriverManager.getConnection(DB_URL,USER,PASS);
