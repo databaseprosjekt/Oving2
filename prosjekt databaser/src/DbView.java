@@ -25,7 +25,7 @@ public class DbView {
 	   }
    }
    /**
-    * Gives ï¿½velse for a given gruppe
+    * Gives øvelse for a given gruppe
     * @param groupID
     * @return ArrayList<ArrayList>
     */
@@ -40,7 +40,7 @@ public class DbView {
 		while(result.next())
 		{
 			arrayResult.get(1).add(result.getString("Ovelse.Navn"));
-			arrayResult.get(0).add(result.getString("Ovelse.ï¿½velsesID"));
+			arrayResult.get(0).add(result.getString("Ovelse.ØvelsesID"));
 		}
 		  closeConnection(result);
 		  return arrayResult;
@@ -108,7 +108,7 @@ public class DbView {
 	  return null;
    }
    /**
-    * Ads new Treningsï¿½kt to db
+    * Ads new Treningsøkt to db
     * @param dato
     * @param tidspunkt
     * @param varighet
@@ -128,7 +128,7 @@ public class DbView {
    }
 
    /**
-    * Adds new Oving to Treningsï¿½kt
+    * Adds new Oving to Treningsøkt
     * @param ovingid
     * @param treningid
     */
@@ -137,7 +137,7 @@ public class DbView {
 	   closeConnection(result);
    }
    /**
-    * Sets Treningsï¿½kt til inneaktivitet
+    * Sets Treningsøkt til inneaktivitet
     * @param oktid
     * @param ventelasjon
     * @param antallTilskuere
@@ -147,7 +147,7 @@ public class DbView {
 	   closeConnection(result);
    }
    /**
-    * sets Treningsï¿½kt til uteaktivitet
+    * sets Treningsøkt til uteaktivitet
     * @param oktid
     * @param verForhold
     * @param verType
@@ -184,7 +184,7 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
-   
+
    public ArrayList<ArrayList> getResultatFromPeriode(int periode) {
 		  ResultSet result =  enquire(querys.getResultatFromPeriode(periode));
 		  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
@@ -197,21 +197,21 @@ public class DbView {
 				while(result.next())
 				{
 					arrayResult.get(0).add(result.getInt("p.PeriodeID"));
-					arrayResult.get(1).add(result.getInt("t.ï¿½ktID"));
+					arrayResult.get(1).add(result.getInt("t.ØktID"));
 					arrayResult.get(2).add(result.getInt("r.ResultatID"));
 					arrayResult.get(3).add(result.getInt("t.Prestasjon"));
 					arrayResult.get(4).add(result.getString("t.Notat"));
 				}
 				  closeConnection(result);
 				  return arrayResult;
-		  } catch (SQLException e) 
+		  } catch (SQLException e)
 		  	{
 			e.printStackTrace();
 		  	}
 		  closeConnection(result);
 		  return null;
 	   }
-   
+
    public String getTotaltResults(){
 	   ResultSet result = enquire(querys.getTotalResaults());
 	   String returnValue = null;

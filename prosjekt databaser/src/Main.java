@@ -14,7 +14,7 @@ public class Main {
 		run:
 		while(true)
 		{
-			System.out.println("1: Opprett treningsï¿½kt");
+			System.out.println("1: Opprett treningsøkt");
 			System.out.println("2: Perioder");
 			System.out.println("3: Statistikk");
 			System.out.println("4: Avslutt");
@@ -39,7 +39,7 @@ public class Main {
 					break run;
 
 				default:
-					System.out.println("Ugyldig valg, prï¿½v igjen:");
+					System.out.println("Ugyldig valg, prøv igjen:");
 					break;
 			}
 			System.out.println();
@@ -90,7 +90,7 @@ public class Main {
 		}
 		if (exercises.get(0).size() > 0)
 		{
-			System.out.println("ï¿½velser:");
+			System.out.println("øvelser:");
 			for (int i = 0; i < exercises.get(0).size(); i++)
 			{
 				String prefix = "";
@@ -150,7 +150,7 @@ public class Main {
 			System.out.println("Perioder:");
 			for (int i = 0; i < periodes.get(0).size(); i++)
 			{
-				System.out.println(Integer.toString(index++) + ": " + periodes.get(1).get(i) + " til " 
+				System.out.println(Integer.toString(index++) + ": " + periodes.get(1).get(i) + " til "
 						+ periodes.get(2).get(i) + " har " + periodes.get(3).get(i) + " treninger.");
 			}
 
@@ -161,7 +161,7 @@ public class Main {
 			System.out.println("Resultater:");
 			for (int i = 0; i < results.get(0).size(); i++)
 			{
-				System.out.println(Integer.toString(index++) + ": Treningsï¿½kt" + results.get(1).get(i));
+				System.out.println(Integer.toString(index++) + ": Treningsøkt" + results.get(1).get(i));
 			}
 		}*/
 		if (index == 1)
@@ -191,6 +191,8 @@ public class Main {
 			return periods(inputIndex);
 		else
 			return (Integer.parseInt((String)periodes.get(0).get(inputIndex-results.get(0).size()-1)));
+	}
+
 	private static void createSession()
 	{
 		String input = "";
@@ -204,7 +206,7 @@ public class Main {
 			try{
 				Date.valueOf(input);
 			}catch(Exception e){
-				System.out.println("Ugyldig dato, prï¿½v igjen::");
+				System.out.println("Ugyldig dato, prøv igjen::");
 				invalid = true;
 			}
 		}
@@ -220,7 +222,7 @@ public class Main {
 			try{
 				Time.valueOf(input+":00");
 			}catch(Exception e){
-				System.out.println("Ugyldig tid, prï¿½v igjen:");
+				System.out.println("Ugyldig tid, prøv igjen:");
 				invalid = true;
 			}
 		}
@@ -239,7 +241,7 @@ public class Main {
 				if (duration <= 0)
 					throw new Exception();
 			}catch(Exception e){
-				System.out.println("Ugyldig varighet, prï¿½v igjen:");
+				System.out.println("Ugyldig varighet, prøv igjen:");
 				invalid = true;
 			}
 		}
@@ -257,7 +259,7 @@ public class Main {
 				if (shape < 1 || shape > 10)
 					throw new Exception();
 			}catch(Exception e){
-				System.out.println("Ugyldig form, prï¿½v igjen:");
+				System.out.println("Ugyldig form, prøv igjen:");
 				invalid = true;
 			}
 		}
@@ -275,19 +277,19 @@ public class Main {
 				if (performance < 1 || performance > 10)
 					throw new Exception();
 			}catch(Exception e){
-				System.out.println("Ugyldig prestasjon, prï¿½v igjen:");
+				System.out.println("Ugyldig prestasjon, prøv igjen:");
 				invalid = true;
 			}
 		}
 
 		System.out.println();
-		System.out.println("Notat til treningsï¿½kten:");
+		System.out.println("Notat til treningsøkten:");
 		String note = inputScanner.nextLine();
 		int id = dbView.newTrening(date, time, duration, shape, performance, note);
 
 		System.out.println();
-		System.out.println("1. Sett som innendï¿½rsï¿½ving.");
-		System.out.println("2. Sett som utendï¿½rsï¿½ving.");
+		System.out.println("1. Sett som innendørsøving.");
+		System.out.println("2. Sett som utendørsøving.");
 
 		invalid = true;
 		while(invalid)
@@ -305,7 +307,7 @@ public class Main {
 					break;
 
 				default:
-					System.out.println("Ugyldig valg, prï¿½v igjen:");
+					System.out.println("Ugyldig valg, prøv igjen:");
 					invalid = true;
 					break;
 			}
@@ -316,7 +318,7 @@ public class Main {
 		addExercise: while(true)
 		{
 			System.out.println();
-			System.out.println("1. Legg til ï¿½ving.");
+			System.out.println("1. Legg til øving.");
 			System.out.println("2. Ferdig.");
 
 			invalid = true;
@@ -335,7 +337,7 @@ public class Main {
 						break addExercise;
 
 					default:
-						System.out.println("Ugyldig valg, prï¿½v igjen:");
+						System.out.println("Ugyldig valg, prøv igjen:");
 						invalid = true;
 						break;
 				}
@@ -369,7 +371,7 @@ public class Main {
 				if (spectators < 0)
 					throw new Exception();
 			}catch(Exception e){
-				System.out.println("Ugyldig tilskuerantall, prï¿½v igjen:");
+				System.out.println("Ugyldig tilskuerantall, prøv igjen:");
 				invalid = true;
 			}
 		}
@@ -380,11 +382,11 @@ public class Main {
 	{
 		String input = "";
 		System.out.println();
-		System.out.println("Beskriv vï¿½rforhold:");
+		System.out.println("Beskriv værforhold:");
 		String weatherConditions = inputScanner.nextLine();
 
 		System.out.println();
-		System.out.println("Beskriv vï¿½rtype:");
+		System.out.println("Beskriv værtype:");
 		String weatherType = inputScanner.nextLine();
 
 		System.out.println();
@@ -398,7 +400,7 @@ public class Main {
 			try{
 				temperature = Integer.parseInt(input);
 			}catch(Exception e){
-				System.out.println("Ugyldig temperatur, prï¿½v igjen:");
+				System.out.println("Ugyldig temperatur, prøv igjen:");
 				invalid = true;
 			}
 		}
