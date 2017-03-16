@@ -15,8 +15,15 @@ public class Main {
 		while(true)
 		{
 			System.out.println("1: Opprett treningsøkt");
+<<<<<<< HEAD
 			System.out.println("2: Resultater");
 			System.out.println("4: Avslutt");
+=======
+			System.out.println("2: Se treningsøkter");
+			System.out.println("3: Perioder");
+			System.out.println("4: Statistikk");
+			System.out.println("5: Avslutt");
+>>>>>>> master
 
 			String input = inputScanner.nextLine();
 
@@ -27,10 +34,25 @@ public class Main {
 					break;
 					
 				case "2":
+<<<<<<< HEAD
 					Resultater();
 					break;
 
 				case "3":
+=======
+					viewSessionList();
+					break;
+
+				case "3":
+					System.out.println(periods(-1));
+					break;
+
+				case "4":
+					statistics();
+					break;
+
+				case "5":
+>>>>>>> master
 					break run;
 
 				default:
@@ -266,7 +288,6 @@ public class Main {
 				{
 					case "1":
 						addExercise(id, exercises);
-						System.out.println(exercises);
 						break;
 
 					case "2":
@@ -352,7 +373,119 @@ public class Main {
 			exercises.add(id);
 	}
 
+<<<<<<< HEAD
 	private static void Resultater()
+=======
+	private static void viewSessionList()
+	{
+		ArrayList<ArrayList> sessions = dbView.getAlleTreninger();
+		for (int i = 1; i <= sessions.get(0).size(); i++)
+		{
+			System.out.println(i + ": " + sessions.get(1).get(i-1).toString() + ", " + sessions.get(2).get(i-1).toString());
+		}
+
+		String input = "";
+		int index = -1;
+		boolean invalid = true;
+		while (invalid)
+		{
+			invalid = false;
+			input = inputScanner.nextLine();
+			try{
+				index = Integer.parseInt(input)-1;
+				if (index < 0 || index >= sessions.get(0).size())
+					throw new Exception();
+			}catch(Exception e){
+				System.out.println("Ugyldig valg, prøv igjen");
+				invalid = true;
+			}
+		}
+		int sessionID = (Integer)sessions.get(0).get(index);
+		Date date = (Date)sessions.get(1).get(index);
+		Time time = (Time)sessions.get(2).get(index);
+		Time duration = (Time)sessions.get(3).get(index);
+		int shape = (Integer)sessions.get(4).get(index);
+		int performance = (Integer)sessions.get(5).get(index);
+		String note = (String)sessions.get(6).get(index);
+		viewSession(sessionID, date, time, duration, shape, performance, note);
+	}
+
+	private static void viewSession(int sessionID, Date date, Time time, Time duration, int shape, int performance, String note)
+	{
+		System.out.println();
+		System.out.println("Dato: " + date);
+		System.out.println("Tidspunkt: " + time);
+		System.out.println("Varighet: " + duration);
+		System.out.println("Form: " + shape);
+		System.out.println("Prestasjon: " + performance);
+		System.out.println("Notat: " + note);
+		System.out.println();
+
+		ArrayList<Object> inside = dbView.getInne(sessionID);
+		if (inside.size() > 0)
+		{
+			System.out.println("Innendørstrening:");
+			System.out.println("Luftventilasjon: " + (String)inside.get(0));
+			System.out.println("Antall tilskuere: " + (Integer)inside.get(1));
+		}
+		else
+		{
+			ArrayList<Object> outside = dbView.getUte(sessionID);
+			if (outside.size() > 0)
+			{
+				System.out.println("Utendørstrening:");
+				System.out.println("Værforhold: " + (String)outside.get(0));
+				System.out.println("Værtype: " + (String)outside.get(1));
+				System.out.println("Temperatur: " + (Integer)outside.get(2));
+			}
+		}
+
+		System.out.println();
+		System.out.println("Øvelser:");
+
+		ArrayList<ArrayList> exercises = dbView.getOvelseFraTrening(sessionID);
+
+		for (int i = 0; i < exercises.get(0).size(); i++)
+		{
+			System.out.println();
+			System.out.println("Navn: " + (String)exercises.get(1).get(i));
+			System.out.println("Beskrivelse: " + (String)exercises.get(2).get(i));
+		}
+
+		System.out.println();
+		System.out.println("1: Slett treningsøkt");
+		System.out.println("2: Ferdig");
+
+		String input = "";
+		boolean invalid = true;
+		while(invalid)
+		{
+			invalid = false;
+			input = inputScanner.nextLine();
+			switch(input)
+			{
+				case "1":
+					dbView.deleteTrening(sessionID);
+
+				case "2":
+					break;
+
+				default:
+					System.out.println("Ugyldig valg, prøv igjen:");
+					invalid = true;
+					break;
+			}
+		}
+	}
+
+	private static void periods()
+	{
+		System.out.println("Go");
+	}
+
+
+	private static void statistics()
+>>>>>>> master
 	{
 		System.out.println("Total results: " + dbView.getTotaltResults() +".");
 		System.out.println("Total workouts: " + dbView.getTotalWorkouts() +".");

@@ -24,6 +24,31 @@ public class DbView {
 		   System.out.println(e);
 	   }
    }
+
+   public ArrayList<ArrayList> getOvelseFraTrening(int sessionID)
+   {
+	   ResultSet result = enquire(querys.getOvelseFraTrening(sessionID));
+	   ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+	   arrayResult.add(new ArrayList<Integer>());
+	   arrayResult.add(new ArrayList<String>());
+	   arrayResult.add(new ArrayList<String>());
+	   try {
+		   while(result.next())
+		   {
+			   arrayResult.get(0).add(result.getString("ØvelsesID"));
+			   arrayResult.get(1).add(result.getString("Navn"));
+			   arrayResult.get(2).add(result.getString("Beskrivelse"));
+		   }
+		   closeConnection(result);
+		   return arrayResult;
+	   }catch (SQLException e)
+	   {
+		   e.printStackTrace();
+	   }
+	   closeConnection(result);
+	   return null;
+   }
+
    /**
     * Gives øvelse for a given gruppe
     * @param groupID
@@ -134,6 +159,84 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
+
+   public ArrayList<ArrayList> getAlleTreninger()
+   {
+	   ResultSet result = enquire(querys.getAlleTreninger());
+	   ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+	   arrayResult.add(new ArrayList<Integer>());
+	   arrayResult.add(new ArrayList<Date>());
+	   arrayResult.add(new ArrayList<Time>());
+	   arrayResult.add(new ArrayList<Time>());
+	   arrayResult.add(new ArrayList<Integer>());
+	   arrayResult.add(new ArrayList<Integer>());
+	   arrayResult.add(new ArrayList<String>());
+
+	   try {
+			while(result.next())
+			{
+				arrayResult.get(0).add(result.getInt("ØktID"));
+				arrayResult.get(1).add(result.getDate("Dato"));
+				arrayResult.get(2).add(result.getTime("Tidspunkt"));
+				arrayResult.get(3).add(result.getTime("Varighet"));
+				arrayResult.get(4).add(result.getInt("Form"));
+				arrayResult.get(5).add(result.getInt("Prestasjon"));
+				arrayResult.get(6).add(result.getString("Notat"));
+			}
+			  closeConnection(result);
+			  return arrayResult;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	   closeConnection(result);
+	   return null;
+   }
+
+   public ArrayList<Object> getInne(int sessionID)
+   {
+	   ResultSet result = enquire(querys.getInne(sessionID));
+	   ArrayList<Object> arrayResult = new ArrayList<Object>();
+
+	   try {
+			if(result.next())
+			{
+				arrayResult.add(result.getString("Luftventilasjon"));
+				arrayResult.add(result.getInt("Antall_tilskuere"));
+			}
+			  closeConnection(result);
+			  return arrayResult;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	   closeConnection(result);
+	   return null;
+   }
+
+   public ArrayList<Object> getUte(int sessionID)
+   {
+	   ResultSet result = enquire(querys.getUte(sessionID));
+	   ArrayList<Object> arrayResult = new ArrayList<Object>();
+
+	   try {
+			if(result.next())
+			{
+				arrayResult.add(result.getString("Værforhold"));
+				arrayResult.add(result.getString("Værtype"));
+				arrayResult.add(result.getInt("Temperatur"));
+			}
+			  closeConnection(result);
+			  return arrayResult;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	   closeConnection(result);
+	   return null;
+   }
+
+
    /**
     * Ads new Treningsøkt to db
     * @param dato
@@ -298,6 +401,11 @@ public class DbView {
 			  return null;
 	}
 
+	public void deleteTrening(int sessionID)
+	{
+		delete(querys.deleteTrening(sessionID));
+	}
+
    /**
     *
     * sets up, adn executes sql
@@ -334,6 +442,24 @@ public class DbView {
 				   }
 			System.out.println("Database error");
 			return null;
+	}
+
+	public void delete(String sql){
+		try {
+		      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+		      stmt = conn.createStatement();
+		      stmt.executeUpdate(sql);
+
+
+			}catch(SQLException se){
+			   se.printStackTrace();
+			}
+		try {
+		    	stmt.close();
+		    	conn.close();
+			}catch(Exception se){
+				se.printStackTrace();
+			}
 	}
 
 	/**
