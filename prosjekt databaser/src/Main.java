@@ -15,15 +15,9 @@ public class Main {
 		while(true)
 		{
 			System.out.println("1: Opprett treningsøkt");
-<<<<<<< HEAD
-			System.out.println("2: Resultater");
-			System.out.println("4: Avslutt");
-=======
 			System.out.println("2: Se treningsøkter");
-			System.out.println("3: Perioder");
-			System.out.println("4: Statistikk");
-			System.out.println("5: Avslutt");
->>>>>>> master
+			System.out.println("3: Resultater");
+			System.out.println("4: Avslutt");
 
 			String input = inputScanner.nextLine();
 
@@ -34,25 +28,14 @@ public class Main {
 					break;
 					
 				case "2":
-<<<<<<< HEAD
-					Resultater();
-					break;
-
-				case "3":
-=======
 					viewSessionList();
 					break;
 
 				case "3":
-					System.out.println(periods(-1));
+					Resultater();
 					break;
-
+					
 				case "4":
-					statistics();
-					break;
-
-				case "5":
->>>>>>> master
 					break run;
 
 				default:
@@ -372,10 +355,6 @@ public class Main {
 		else
 			exercises.add(id);
 	}
-
-<<<<<<< HEAD
-	private static void Resultater()
-=======
 	private static void viewSessionList()
 	{
 		ArrayList<ArrayList> sessions = dbView.getAlleTreninger();
@@ -477,15 +456,8 @@ public class Main {
 			}
 		}
 	}
-
-	private static void periods()
-	{
-		System.out.println("Go");
-	}
-
-
-	private static void statistics()
->>>>>>> master
+	
+	private static void Resultater()
 	{
 		System.out.println("Total results: " + dbView.getTotaltResults() +".");
 		System.out.println("Total workouts: " + dbView.getTotalWorkouts() +".");
