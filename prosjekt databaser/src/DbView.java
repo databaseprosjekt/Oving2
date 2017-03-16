@@ -191,7 +191,27 @@ public class DbView {
 	   closeConnection(result);
 	   return null;
    }
-
+   
+   public ArrayList<Object> getOvelse(int exerciseID)
+   {
+       ResultSet result = enquire(querys.getOvelse(exerciseID));
+       ArrayList<Object> arrayResult = new ArrayList<Object>();
+       try {
+           if(result.next())
+           {
+               arrayResult.add(result.getInt("ØvelsesID"));
+               arrayResult.add(result.getString("Navn"));
+               arrayResult.add(result.getString("Beskrivelse"));
+           }
+           closeConnection(result);
+           return arrayResult;
+       }catch (SQLException e)
+       {
+           e.printStackTrace();
+       }
+       closeConnection(result);
+       return null;
+   }
    public ArrayList<Object> getInne(int sessionID)
    {
 	   ResultSet result = enquire(querys.getInne(sessionID));

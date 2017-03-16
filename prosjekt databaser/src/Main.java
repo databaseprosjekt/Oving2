@@ -546,13 +546,13 @@ public class Main {
 			System.out.println("");
 			selectWorkout(workout);
 		}
-		
+	}
 	    private static void viewExercise(int exerciseID)
 	    {
 	        ArrayList<Object> exercise = dbView.getOvelse(exerciseID);
 	        System.out.println();
 	        System.out.println("Navn: " + (String)exercise.get(1));
-	        System.out.println("Beskrivelse: " + (String)exercise.get());
+	        System.out.println("Beskrivelse: " + (String)exercise.get(2));
 	        System.out.println();
 	        System.out.println("Enter for å fortsette");
 	        inputScanner.nextLine();
@@ -614,7 +614,7 @@ public class Main {
 			return periods(inputIndex);
 		else
 			return (Integer.parseInt((String)periodes.get(0).get(inputIndex-results.get(0).size()-1))); */
-	}
+
 	
 
 }

@@ -140,5 +140,8 @@ public class DbQuerys {
 				+ " and 2 = p.PeriodeID;";
 		
 	}
+	public static String getOvelse(int id){
+        return "SELECT * FROM pciverse_tdt4145.Øvelse WHERE ØvelsesID = " + id + ";";
+    }
 
 }
