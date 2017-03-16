@@ -113,6 +113,14 @@ public class DbQuerys {
 				+ "AND r.ResultatID = r_p.ResultatID "
 				+ "AND t.ØktID = r.ØktID;";
 }
+    public String getWorkoutFromPeriod(int periodeid){
+        return "select DISTINCT t.Dato, t.Tidspunkt, t.ØktID, t.Varighet, t.Notat, t.Form, t.Prestasjon  "
+                + "FROM pciverse_tdt4145.Treningsøkt t, "
+                + "pciverse_tdt4145.Periode p "
+                + "WHERE p.PeriodeID = " + periodeid +" "
+                + "AND t.Dato between p.Fradato and p.Tildato;";
+ 
+    }
 	/////////////////////
 	//Querys for stats://
 	/////////////////////
@@ -129,17 +137,7 @@ public class DbQuerys {
 	public String getPeriodes(){
 		return "SELECT * FROM pciverse_tdt4145.Periode;";
 	}
-	public String getWorkoutFromPeriod(int periodeid){
-		return "select DISTINCT t.Dato, t.Tidspunkt, t.ØktID, t.Varighet, t.Notat, t.Form, t.Prestasjon  "
-				+ "from pciverse_tdt4145.Treningsøkt t, "
-				+ "pciverse_tdt4145.Resultat r, "
-				+ "pciverse_tdt4145.Resultat_Periode r_p, "
-				+ "pciverse_tdt4145.Periode p "
-				+ "where t.ØktID = r.ØktID and "
-				+ "r.ResultatID = "+periodeid
-				+ " and 2 = p.PeriodeID;";
-		
-	}
+
 	public static String getOvelse(int id){
         return "SELECT * FROM pciverse_tdt4145.Øvelse WHERE ØvelsesID = " + id + ";";
     }

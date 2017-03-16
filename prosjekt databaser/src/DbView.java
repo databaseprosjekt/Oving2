@@ -24,7 +24,8 @@ public class DbView {
 		   System.out.println(e);
 	   }
    }
-
+   
+   
    public ArrayList<ArrayList> getOvelseFraTrening(int sessionID)
    {
 	   ResultSet result = enquire(querys.getOvelseFraTrening(sessionID));
@@ -268,7 +269,7 @@ public class DbView {
 
 
 	   try {
-			if(result.next())
+			while(result.next())
 			{
 				arrayResult.get(0).add(result.getInt("ØktID"));
 				arrayResult.get(1).add(result.getDate("Dato"));
@@ -480,7 +481,11 @@ public class DbView {
 		return null;
 
 	}
-
+	/**
+	 * sends a add insert querye to db
+	 * @param sql
+	 * @return
+	 */
 	public ResultSet insert(String sql){
 		try {
 		      conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -498,7 +503,7 @@ public class DbView {
 	}
 	
 	/**
-	 * Sends a qurey to db
+	 * Sends a delete querye to db
 	 * @param sql
 	 */
 	public void delete(String sql){

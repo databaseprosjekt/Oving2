@@ -6,7 +6,10 @@ import java.util.Scanner;
 import com.mysql.jdbc.StringUtils;
 
 public class Main {
-
+	
+	/**
+	 * sets up main main menu system
+	 */
 	private static Scanner inputScanner = null;
 	private static DbView dbView = new DbView();
 	public static void main (String[] args)
@@ -63,7 +66,13 @@ public class Main {
 	{
 		return categories(groupID, null);
 	}
-
+	
+	/**
+	 * Allows the user to search based on category
+	 * @param groupID
+	 * @param includedExercises
+	 * @return
+	 */
 	private static int categories(int groupID, ArrayList<Integer> includedExercises)
 	{
 		ArrayList<ArrayList> groups = null;
@@ -296,7 +305,10 @@ public class Main {
 		}
 		System.out.println();
 	}
-
+	/**
+	 * setts workout to indoor
+	 * @param sessionId
+	 */
 	private static void setIndoors(int sessionId)
 	{
 		String input = "";
@@ -323,7 +335,10 @@ public class Main {
 		}
 		dbView.setInne(sessionId, ventilation, spectators);
 	}
-
+	/**
+	 * sets workout to outdoor
+	 * @param sessionId
+	 */
 	private static void setOutdoors(int sessionId)
 	{
 		String input = "";
@@ -352,7 +367,8 @@ public class Main {
 		}
 		dbView.setUte(sessionId, weatherConditions, weatherType, temperature);
 	}
-
+	//*
+	
 	private static void addExercise(int sessionId, ArrayList<Integer> exercises)
 	{
 		int id = categories(-1, exercises);
@@ -361,7 +377,12 @@ public class Main {
 		else
 			exercises.add(id);
 	}
+	
+	/**
+	 * Enables the user to choise how he/she want to see the workout list, from period or all
+	 */
 	private static void viewSessionList()
+	
 	{
 		run:
 		while(true)
@@ -397,8 +418,11 @@ public class Main {
 			System.out.println();
 		}
 	}
-		
 	
+	/**
+	 * select a given workout
+	 * @param sessions
+	 */
 	public static void selectWorkout(ArrayList<ArrayList> sessions) {
 		String input = "";
 		int index = -1;
@@ -425,7 +449,17 @@ public class Main {
 		String note = (String)sessions.get(6).get(index);
 		viewSession(sessionID, date, time, duration, shape, performance, note);
 	}
-
+	
+	/**
+	 * show, edit and delete workout
+	 * @param sessionID
+	 * @param date
+	 * @param time
+	 * @param duration
+	 * @param shape
+	 * @param performance
+	 * @param note
+	 */
 	private static void viewSession(int sessionID, Date date, Time time, Time duration, int shape, int performance, String note)
 	{
 		System.out.println();
@@ -493,7 +527,9 @@ public class Main {
 			}
 		}
 	}
-	
+	/**
+	 * shows basic statistics
+	 */
 	private static void statistikk()
 	{
 		System.out.println("Total results: " + dbView.getTotaltResults() +".");
@@ -518,9 +554,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * prints workout for a given period
+	 */
 	private static void periods() {
-		
-		
 		System.out.println("Nr\tFraDato \tTilDato \n----------------------------------------");
 		ArrayList<ArrayList> periodes = dbView.getPeriodes();
 		
@@ -546,75 +583,19 @@ public class Main {
 			selectWorkout(workout);
 		}
 	}
-	
-	    private static void viewExercise(int exerciseID)
-	    {
-	        ArrayList<Object> exercise = dbView.getOvelse(exerciseID);
-	        System.out.println();
-	        System.out.println("Navn: " + (String)exercise.get(1));
-	        System.out.println("Beskrivelse: " + (String)exercise.get(2));
-	        System.out.println();
-	        System.out.println("Enter for å fortsette");
-	        inputScanner.nextLine();
-	    }
-		/*
-		ArrayList<ArrayList> periodes = null;
-		ArrayList<ArrayList> results = null;
-
 		
-		if (periode < 0) {
-			periodes = dbView.getTreningFromPeriode(periode);
-			results = dbView.getResultatFromPeriode(periode);
-		}
-
-		int index = 1;
-		if (periodes.get(0).size() > 0)
-		{
-			System.out.println("Perioder:");
-			for (int i = 0; i < periodes.get(0).size(); i++)
-			{
-				System.out.println(Integer.toString(index++) + ": " + periodes.get(1).get(i) + " til "
-						+ periodes.get(2).get(i) + " har " + periodes.get(3).get(i) + " treninger.");
-			}
-
-			System.out.println();
-		}
-		/*if (results.get(0).size() > 0)
-		{
-			System.out.println("Resultater:");
-			for (int i = 0; i < results.get(0).size(); i++)
-			{
-				System.out.println(Integer.toString(index++) + ": Treningsøkt" + results.get(1).get(i));
-			}
-		}
-		if (index == 1)
-		{
-			System.out.println("result is empty");
-			return -1;
-		}
-		String input = "";
-		int inputIndex = 0;
-		boolean invalid = true;
-		while (invalid) {
-			invalid = false;
-			try
-			{
-				input = inputScanner.nextLine();
-				inputIndex = Integer.parseInt(input);
-				if (inputIndex < 1 || inputIndex >= index)
-					throw new Exception();
-			}
-			catch(Exception e)
-			{
-				System.out.println("Invalid input");
-				invalid = true;
-			}
-		}
-		if(inputIndex <= results.get(0).size())
-			return periods(inputIndex);
-		else
-			return (Integer.parseInt((String)periodes.get(0).get(inputIndex-results.get(0).size()-1))); */
-
-	
-
+	/**
+	 * Show exercise window
+	 * @param exerciseID
+	 */
+	private static void viewExercise(int exerciseID)
+	    {
+        ArrayList<Object> exercise = dbView.getOvelse(exerciseID);
+        System.out.println();
+        System.out.println("Navn: " + (String)exercise.get(1));
+        System.out.println("Beskrivelse: " + (String)exercise.get(2));
+        System.out.println();
+        System.out.println("Enter for å fortsette");
+        inputScanner.nextLine();
+	    }
 }
