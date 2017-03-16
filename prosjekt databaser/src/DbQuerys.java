@@ -62,15 +62,16 @@ public class DbQuerys {
 	///////////////////////
 
 	public static String getTreningFromPeriode(int periode) {
-		return "SELECT p.FraDato, p.TilDato, COUNT(*)"
-				+ " FROM Treningsøkt t, Periode p "
+		return "SELECT p.PeriodeID, p.FraDato, p.TilDato, COUNT(*)"
+				+ " FROM pciverse_tdt4145.Treningsøkt t, pciverse_tdt4145.Periode p "
 				+ "WHERE p.FraDato < t.Dato"
 				+ " AND p.TilDato > t.Dato;";
 	}
+	// Todo: knytte datoer til bestemte perioder
 
 	public static String getResultatFromPeriode(int periode) {
-		return "SELECT p.PeriodeID, r.ResultatID, t.Prestasjon, t.Notat"
-				+ " FROM Periode p, Resultat_Periode r_p, Resultat r, Treningsøkt t "
+		return "SELECT p.PeriodeID, t.ØktID, r.ResultatID, t.Prestasjon, t.Notat"
+				+ " FROM pciverse_tdt4145.Periode p, pciverse_tdt4145.Resultat_Periode r_p, pciverse_tdt4145.Resultat r, pciverse_tdt4145.Treningsøkt t "
 				+ "WHERE p.PeriodeID = r_p.PeriodeID "
 				+ "AND r.ResultatID = r_p.ResultatID "
 				+ "AND t.ØktID = r.ØktID;";

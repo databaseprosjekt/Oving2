@@ -1,6 +1,7 @@
 //STEP 1. Import required packages
 import java.sql.*;
 import java.util.ArrayList;
+import java.sql.Date;
 
 public class DbView {
    // JDBC driver name and database URL
@@ -24,7 +25,7 @@ public class DbView {
 	   }
    }
    /**
-    * Gives Øvelse for a given gruppe
+    * Gives ï¿½velse for a given gruppe
     * @param groupID
     * @return ArrayList<ArrayList>
     */
@@ -39,7 +40,7 @@ public class DbView {
 		while(result.next())
 		{
 			arrayResult.get(1).add(result.getString("Ovelse.Navn"));
-			arrayResult.get(0).add(result.getString("Ovelse.ØvelsesID"));
+			arrayResult.get(0).add(result.getString("Ovelse.ï¿½velsesID"));
 		}
 		  closeConnection(result);
 		  return arrayResult;
@@ -107,7 +108,7 @@ public class DbView {
 	  return null;
    }
    /**
-    * Ads new Treningsøkt to db
+    * Ads new Treningsï¿½kt to db
     * @param dato
     * @param tidspunkt
     * @param varighet
@@ -127,7 +128,7 @@ public class DbView {
    }
 
    /**
-    * Adds new Oving to Treningsøkt
+    * Adds new Oving to Treningsï¿½kt
     * @param ovingid
     * @param treningid
     */
@@ -136,7 +137,7 @@ public class DbView {
 	   closeConnection(result);
    }
    /**
-    * Sets Treningsøkt til inneaktivitet
+    * Sets Treningsï¿½kt til inneaktivitet
     * @param oktid
     * @param ventelasjon
     * @param antallTilskuere
@@ -146,7 +147,7 @@ public class DbView {
 	   closeConnection(result);
    }
    /**
-    * sets Treningsøkt til uteaktivitet
+    * sets Treningsï¿½kt til uteaktivitet
     * @param oktid
     * @param verForhold
     * @param verType
@@ -162,13 +163,17 @@ public class DbView {
    public ArrayList<ArrayList> getTreningFromPeriode(int periode) {
 	  ResultSet result =  enquire(querys.getTreningFromPeriode(periode));
 	  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
-	  arrayResult.add(new ArrayList<String>());
-	  arrayResult.add(new ArrayList<String>());
+	  arrayResult.add(new ArrayList<Integer>());
+	  arrayResult.add(new ArrayList<Date>());
+	  arrayResult.add(new ArrayList<Date>());
+	  arrayResult.add(new ArrayList<Integer>());
 	  try {
 			while(result.next())
 			{
-				arrayResult.get(0).add(result.getString("p.FraDato"));
-				arrayResult.get(1).add(result.getString("p.TilDato"));
+				arrayResult.get(0).add(result.getString("p.PeriodeID"));
+				arrayResult.get(1).add(result.getDate("p.FraDato"));
+				arrayResult.get(2).add(result.getDate("p.TilDato"));
+				arrayResult.get(3).add(result.getString("COUNT(*)"));
 			}
 			  closeConnection(result);
 			  return arrayResult;
@@ -179,7 +184,34 @@ public class DbView {
 	  closeConnection(result);
 	  return null;
    }
-
+   
+   public ArrayList<ArrayList> getResultatFromPeriode(int periode) {
+		  ResultSet result =  enquire(querys.getResultatFromPeriode(periode));
+		  ArrayList<ArrayList> arrayResult = new ArrayList<ArrayList>();
+		  arrayResult.add(new ArrayList<Integer>());
+		  arrayResult.add(new ArrayList<Integer>());
+		  arrayResult.add(new ArrayList<Integer>());
+		  arrayResult.add(new ArrayList<Integer>());
+		  arrayResult.add(new ArrayList<String>());
+		  try {
+				while(result.next())
+				{
+					arrayResult.get(0).add(result.getInt("p.PeriodeID"));
+					arrayResult.get(1).add(result.getInt("t.ï¿½ktID"));
+					arrayResult.get(2).add(result.getInt("r.ResultatID"));
+					arrayResult.get(3).add(result.getInt("t.Prestasjon"));
+					arrayResult.get(4).add(result.getString("t.Notat"));
+				}
+				  closeConnection(result);
+				  return arrayResult;
+		  } catch (SQLException e) 
+		  	{
+			e.printStackTrace();
+		  	}
+		  closeConnection(result);
+		  return null;
+	   }
+   
    public String getTotaltResults(){
 	   ResultSet result = enquire(querys.getTotalResaults());
 	   String returnValue = null;
