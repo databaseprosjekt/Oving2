@@ -87,7 +87,5 @@ public class DbQuerys {
 	}
 	public String getTotaltExercies() {
 		return "SELECT COUNT(*) FROM pciverse_tdt4145.Øvelse;";
-	}
-
-	
+	}	
 }

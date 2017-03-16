@@ -125,10 +125,32 @@ public class Main {
 
 	private static void statistics()
 	{
-
 		System.out.println("Total results: " + dbView.getTotaltResults() +".");
 		System.out.println("Total workouts: " + dbView.getTotalWorkouts() +".");
 		System.out.println("Total exercices: " + dbView.getTotaltExercies() +".");
-	}
+		System.out.println("");
+		
+		
+		inputScanner = new Scanner(System.in);
+		run:
+		while(true)
+		{
+			System.out.println("1. Vis statistikk for periode:");
+			System.out.println("2. Go back");
+			String input = inputScanner.nextLine();
 
+			switch(input)
+			{
+				case "1":
+					System.out.println();
+					break;
+
+				case "2":
+					break;
+
+				default:
+					System.out.println("Invalid input");
+			}
+		}
+	}
 }
