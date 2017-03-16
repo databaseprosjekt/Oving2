@@ -116,7 +116,7 @@ public class DbView {
 	  try {
 		while(result.next())
 		{
-			arrayResult.get(0).add(result.getString("PeriodeID"));
+			arrayResult.get(0).add(result.getInt("PeriodeID"));
 			arrayResult.get(1).add(result.getDate("FraDato"));
 			arrayResult.get(2).add(result.getDate("TilDato"));
 
@@ -245,9 +245,9 @@ public class DbView {
 	   try {
 			if(result.next())
 			{
-				arrayResult.get(0).add(result.getString("ØktID"));
-				arrayResult.get(1).add(result.getInt("Dato"));
-				arrayResult.get(2).add(result.getString("Tidspunkt"));
+				arrayResult.get(0).add(result.getInt("ØktID"));
+				arrayResult.get(1).add(result.getDate("Dato"));
+				arrayResult.get(2).add(result.getTime("Tidspunkt"));
 				
 			}
 			  closeConnection(result);
