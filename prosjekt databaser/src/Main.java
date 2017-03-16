@@ -34,7 +34,7 @@ public class Main {
 					break;
 
 				case "3":
-					Statistikk();
+					statistikk();
 					break;
 					
 				case "4":
@@ -490,7 +490,7 @@ public class Main {
 		}
 	}
 	
-	private static void Statistikk()
+	private static void statistikk()
 	{
 		System.out.println("Total results: " + dbView.getTotaltResults() +".");
 		System.out.println("Total workouts: " + dbView.getTotalWorkouts() +".");

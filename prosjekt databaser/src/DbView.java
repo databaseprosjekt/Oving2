@@ -241,6 +241,11 @@ public class DbView {
 	   arrayResult.add(new ArrayList<Integer>());
 	   arrayResult.add(new ArrayList<Date>());
 	   arrayResult.add(new ArrayList<Time>());
+	   arrayResult.add(new ArrayList<Time>());
+	   arrayResult.add(new ArrayList<Integer>());
+	   arrayResult.add(new ArrayList<Integer>());
+	   arrayResult.add(new ArrayList<String>());
+
 
 	   try {
 			if(result.next())
@@ -248,6 +253,10 @@ public class DbView {
 				arrayResult.get(0).add(result.getInt("ØktID"));
 				arrayResult.get(1).add(result.getDate("Dato"));
 				arrayResult.get(2).add(result.getTime("Tidspunkt"));
+				arrayResult.get(3).add(result.getTime("Varighet"));
+				arrayResult.get(4).add(result.getInt("Form"));
+				arrayResult.get(5).add(result.getInt("Prestasjon"));
+				arrayResult.get(6).add(result.getString("Notat"));
 				
 			}
 			  closeConnection(result);
