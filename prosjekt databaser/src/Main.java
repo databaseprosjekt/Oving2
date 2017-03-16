@@ -18,8 +18,9 @@ public class Main {
 		{
 			System.out.println("1: Opprett treningsøkt");
 			System.out.println("2: Se treningsøkter");
-			System.out.println("3: Statistikk");
-			System.out.println("4: Avslutt");
+			System.out.println("3: Se Øvelser");
+			System.out.println("4: Statistikk");
+			System.out.println("5: Avslutt");
 
 			String input = inputScanner.nextLine();
 
@@ -34,10 +35,14 @@ public class Main {
 					break;
 
 				case "3":
-					statistikk();
+					viewExercise(categories(-1));
 					break;
 					
 				case "4":
+					statistikk();
+					break;
+					
+				case "5":
 					break run;
 
 				default:
@@ -542,6 +547,16 @@ public class Main {
 			selectWorkout(workout);
 		}
 		
+	    private static void viewExercise(int exerciseID)
+	    {
+	        ArrayList<Object> exercise = dbView.getOvelse(exerciseID);
+	        System.out.println();
+	        System.out.println("Navn: " + (String)exercise.get(1));
+	        System.out.println("Beskrivelse: " + (String)exercise.get());
+	        System.out.println();
+	        System.out.println("Enter for å fortsette");
+	        inputScanner.nextLine();
+	    }
 		/*
 		ArrayList<ArrayList> periodes = null;
 		ArrayList<ArrayList> results = null;
