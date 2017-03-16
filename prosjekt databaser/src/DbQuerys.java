@@ -16,7 +16,7 @@ public class DbQuerys {
 	/////////////////////////
 	//Querys for categories//
 	/////////////////////////
-	
+
 	public static  String getSubGrupper(int groupID){
 		return "SELECT G.Navn, GG.AltGruppeID "
 				+ "FROM pciverse_tdt4145.Gruppe G, pciverse_tdt4145.Gruppe_Gruppe GG "
@@ -42,7 +42,7 @@ public class DbQuerys {
 	public static String newTrening(String dato, String tidspunkt, int varighet, int form, int prestasjon, String notat) {
 		return "INSERT INTO pciverse_tdt4145.Treningsøkt"
 				+ "(Dato, Tidspunkt, Varighet, Form, Prestasjon, Notat) "
-				+ "values("+dato+","+tidspunkt+","+varighet+","+form+","+prestasjon+","+notat+");";
+				+ "VALUES('"+dato+"', '"+tidspunkt+"', '"+(varighet/60)+":"+(varighet%60)+":00', "+form+", "+prestasjon+", '"+notat+"');";
 	}
 	public static String newOving(int ovingid, int treningid) {
 		return "INSERT INTO pciverse_tdt4145.Treningsøkt_Øvelse(ØktID, ØvelseID)"
@@ -50,17 +50,17 @@ public class DbQuerys {
 	}
 	public static String setInne(int oktid, String ventelasjon, int antallTilskuere){
 		return "INSERT INTO pciverse_tdt4145.Innendørsaktivitet(ØktID, Luftventilasjon, Antall_tilskuere) "
-				+ "values("+oktid+","+ventelasjon+","+antallTilskuere+"); ";
+				+ "values("+oktid+",'"+ventelasjon+"',"+antallTilskuere+"); ";
 	}
 	public static String setUte(int oktid, String verForhold, String verType,  int temp){
 		return "INSERT INTO pciverse_tdt4145.Utendørsaktivitet(ØktID, Værforhold, værtype, Temperatur) "
-				+ "values("+oktid+","+verForhold+","+verType+","+temp+");";
+				+ "values("+oktid+",'"+verForhold+"','"+verType+"',"+temp+");";
 	}
-	
+
 	///////////////////////
 	//Querys for periodes//
 	///////////////////////
-	
+
 	public static String getTreningFromPeriode(int periode) {
 		return "SELECT p.FraDato, p.TilDato, COUNT(*)"
 				+ " FROM Treningsøkt t, Periode p "
@@ -78,7 +78,7 @@ public class DbQuerys {
 	/////////////////////
 	//Querys for stats://
 	/////////////////////
-	
+
 	public static String getTotalResaults(){
 		return "SELECT COUNT(*) FROM pciverse_tdt4145.Resultat;";
 	}
@@ -89,5 +89,5 @@ public class DbQuerys {
 		return "SELECT COUNT(*) FROM pciverse_tdt4145.Øvelse;";
 	}
 
-	
+
 }
